@@ -1,0 +1,223 @@
+%% thesis.tex (based on thesisPhD.tex by https://github.com/agabardo)
+%% Philipp V. Rouast
+%% https://github.com/prouast/uon_latex_thesis_template
+
+% Font size and style must be reasonable for the reader to read the thesis on a screen or in hard-copy. Styles such as Arial and Times New Roman, with a font size of 10-12 are commonly used.
+% The main argument of the thesis must be typed in 1.5 or double spacing. Variation in spacing may considered desirable for the presentation of tables, quotations, etc.
+% The margin on each page should be not less than 4 cm on the left, 2 cm on the right, 3 cm at the top and 2 cm at the bottom for right hand pages. For left hand pages the side margins are reversed to 2cm on the left and 4 cm on the right to allow for binding.
+% In cases where are hard copy submission is required, pages in the body of the thesis may be double- sided (i.e. printed on both sides) at your discretion.
+
+% oneandhalfspace
+\documentclass[a4paper,10pt,phdthesis,oneside,doublespace,pdflatex]{assets/latex/cssethesis}
+
+% Change "phdthesis" to "confirmationreport" for confirmation report
+
+% * Include the option "pdflatex" above if you want to use pdflatex rather than dvips
+% * Include the option "oneside" if you don't want formatting for two-sided  printing.
+% * include ::
+%                 = singlespace}{\AtBeginDocument{\singlespacing}}
+%                 = oneandhalfspace}{\AtBeginDocument{\onehalfspacing}}
+%                 = doublespace}{\AtBeginDocument{\doublespacing}}
+% * Include the option "nocoursecode" so that the numerical course code is suppressed after the course name.
+% * Include option "thesisdraft" to get a timestamp and "Draft" message in the footer
+
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+
+% *** FONT/LANGUAGE PACKAGES ***
+%
+\usepackage[british]{babel}
+\usepackage[sfdefault,light]{roboto}  %% Option 'sfdefault' only if the base font of the document is to be sans serif
+\usepackage[T1]{fontenc}
+\usepackage[babel=true]{microtype}
+\usepackage{hyphenat}
+\hyphenation{Girvan}
+\usepackage{lipsum}
+\usepackage{url}
+\usepackage{soul} % For highlighting in draft
+
+% *** ALGORITHM PACKAGES ***
+%
+\usepackage[ruled,linesnumbered]{algorithm2e} % For algorithm
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[pdftex]{graphicx}
+\graphicspath{{figures/}}
+\DeclareGraphicsExtensions{.pdf,.png}
+\usepackage{pgfplots} % For graphs
+\usepgfplotslibrary{fillbetween} % For plots
+\usepackage[final,poster=last]{animate} % For animations
+%\onehalfspacing %%% <- Increase spacing for the proofread
+
+% *** TYPESETTING PACKAGES ***s
+%
+\usepackage{setspace} %%% for additional spacing
+\usepackage{xcolor}
+\usepackage{framed}
+\colorlet{shadecolor}{gray!20}
+\usepackage{textcomp}
+\makeatletter
+\let\MYcaption\@makecaption
+\makeatother
+\usepackage[font=footnotesize]{subcaption}
+\makeatletter
+\let\@makecaption\MYcaption
+\makeatother
+\usepackage{enumitem}
+\usepackage{glossaries}
+
+% *** TABLE RELATED PACKAGES ***
+%
+\usepackage{array} % For bold table hline
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage[flushleft]{threeparttable}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % For centering in table
+\newcolumntype{C}{>{\Centering\arraybackslash}X} % 
+\usepackage{mathtools} % For matrix in table
+
+% *** MATH RELATED PACKAGES ***
+%
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{float}
+%
+
+% Redefine @makechapterhead
+% This is done to get rid of "Chapter X" taking up space at the start of each section.
+%
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        %\huge\bfseries \@chapapp\space \thechapter
+        \Huge\bfseries \thechapter.\space%
+        %\par\nobreak
+        %\vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+% Define Acronyms
+\newacronym{dnn}{DNN}{deep neural network}
+
+\makeglossaries
+
+% *** BEGIN DOCUMENT ***
+%
+\begin{document}
+%
+
+% Author
+\thesisauthor{Chuck Norris}
+\thesisauthorlastname{Norris}
+%\thesisauthorpreviousdegrees{MSc. Kung Fu.} % Optional
+\thesisfield{Ass Kicking}
+
+% Department
+\thesisdepartment{\bfseries The University of Newcastle \\ Faculty of Engineering and Built Environment\\  School of Electrical Engineering and Computing}
+
+% Date
+\thesismonth{August} % Optional. Current month is used if this is not set
+\thesisyear{2020} % Optional. Current year is used if this is not set
+
+% Title
+\thesistitle{Latex thesis template}
+
+% Supervisors
+\thesissupervisor{Prof Dr. Al Caholic}
+\thesissupervisoremail{al.caholic@newcastle.edu.au}
+\thesisassocsupervisor{Dr. Seymour Butts}
+\thesisassocsupervisoremail{seymour.butts@newcastle.edu.au}
+
+% Make front matter
+\frontmatter
+
+% The title page
+% List your thesis title, your name in full, previous qualifications held in abbreviated form e.g. BSc(Hons)(Newcastle), the full name of the degree for which your thesis is submitted, and the month and year of submission of the thesis for examination.
+\thesistitlepage
+
+% Declaration pages
+% After the title page, you must include a page with the following signed statement.
+\thesisdeclarationonepage
+\thesispublications{%
+\begin{itemize}
+	\item Paper 1 details
+	\item Paper 2 details
+	\item Paper 3 details
+	\item ...
+\end{itemize}
+}
+\thesisdeclarationthreepage
+
+% Acknowledgments
+% All candidates in receipt of a RTP Tuition Scholarship and/or RTP Fees Offset must include acknowledgement of the support received from the Australian Government Research Training Program Scholarship. All domestic students receive some support from this scholarship scheme in the form of a fees-offset scholarship.
+\begin{thesisacknowledgments}
+\input{thesis_acknowledgments}
+\end{thesisacknowledgments}
+
+% Table of contents
+% The table of contents should provide a list of thesis chapters and major sections, with page numbers. Pages should be numbered consecutively throughout the document.
+\tableofcontents
+
+% Abstract
+% The abstract should consist of approximately 300 words.
+\begin{thesisabstract}
+\input{thesis_abstract}	
+\end{thesisabstract}
+
+% Main matter
+\mainmatter
+
+% A Doctoral thesis should not normally exceed 100,000 words, excluding appendices, tables and illustrative matter.
+
+% Chapter 1
+\glsresetall % Reset all acronyms to be written out on first use
+\chapter{Introduction}
+\label{ch:chapter_1}
+\input{thesis_chapter_1}
+
+% Chapter 2: Dietary Intake Monitoring
+\glsresetall % Reset all acronyms to be written out on first use
+\chapter{Something else}
+\label{ch:chapter_2}
+\input{thesis_chapter_2}
+
+% ...
+
+\appendix % all \chapter{..} commands after this will generate appendices
+\glsresetall % Reset all acronyms to be written out on first use
+
+% \chapter{Appendix chapter}
+%\label{ch:appendix_a}
+%\input{thesis_appendix}
+
+\backmatter % start the thesis back matter - the numbering of chapters stops here.
+
+% References
+\pagestyle{plain}
+\bibliographystyle{abbrv}
+\bibliography{thesis}
+
+% list of acronyms
+\addcontentsline{toc}{chapter}{List of Acronyms}
+\printglossary[type=\acronymtype,title={List of Acronyms}]
+
+% list of figures
+\listoffigures
+
+% List of tables
+\listoftables
+
+\end{document}
